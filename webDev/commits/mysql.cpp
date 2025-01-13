@@ -4,13 +4,15 @@
 #include <cppconn/statement.h>
 #include <iostream>
 
-void connectToMySQL() {
+void connectToMySQL()
+{
     const std::string server = "tcp://127.0.0.1:3306"; // Replace with your MySQL server
     const std::string username = "your_username";      // Replace with your MySQL username
     const std::string password = "your_password";      // Replace with your MySQL password
     const std::string database = "your_database";      // Replace with your database name
 
-    try {
+    try
+    {
         // Create a MySQL driver instance
         sql::Driver *driver = get_driver_instance();
 
@@ -29,17 +31,21 @@ void connectToMySQL() {
         std::unique_ptr<sql::ResultSet> result(statement->executeQuery("SELECT DATABASE();"));
 
         // Process the results
-        if (result->next()) {
+        if (result->next())
+        {
             std::cout << "Connected to database: " << result->getString(1) << std::endl;
         }
-    } catch (sql::SQLException &e) {
+    }
+    catch (sql::SQLException &e)
+    {
         std::cerr << "SQLException: " << e.what() << std::endl;
         std::cerr << "Error code: " << e.getErrorCode() << std::endl;
         std::cerr << "SQLState: " << e.getSQLState() << std::endl;
     }
 }
 
-int main() {
+int main()
+{
     connectToMySQL();
     return 0;
 }
